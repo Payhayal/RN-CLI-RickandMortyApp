@@ -1,12 +1,20 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import Colors from '../../themes/colors';
 import {ArrowCircleRight} from 'iconsax-react-native';
 import {GenderIcon, StatusIcon} from './genderIcon';
+import {useNavigation} from '@react-navigation/native';
+import {CHARACTERDETAIL} from '../../utils/routes';
 
 const CharacterCard = ({item}) => {
+  const navigation = useNavigation();
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate(CHARACTERDETAIL, {characterID: item.id})
+      }
+      style={styles.container}>
       <View style={styles.imageContainer}>
         <Image style={styles.image} source={{uri: item.image}} />
       </View>
@@ -27,7 +35,7 @@ const CharacterCard = ({item}) => {
       <View style={styles.iconContainer}>
         <ArrowCircleRight size={28} color={Colors.BLACK} />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
