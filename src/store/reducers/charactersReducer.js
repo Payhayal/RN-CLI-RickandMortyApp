@@ -19,6 +19,9 @@ const initialState = {
   errorSingleCharacter: null,
   params: {
     page: 1,
+    status: null,
+    gender: null,
+    species: null,
   },
 };
 
@@ -34,6 +37,7 @@ const characterReducer = (state = initialState, action) => {
       return {
         ...state,
         characterList: [...state.characterList, ...action.payload],
+        pending: false,
       };
     case PENDING_CHARACTERS:
       return {
@@ -69,7 +73,7 @@ const characterReducer = (state = initialState, action) => {
     case CHANGE_PAGE_PARAMS:
       return {
         ...state,
-        params: action.params,
+        params: {...state.params, ...action.params},
       };
 
     default:

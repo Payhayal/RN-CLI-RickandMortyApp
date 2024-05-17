@@ -33,7 +33,13 @@ function RootNavigator() {
         component={TabNavigator}
       />
       <Stack.Screen name={CHARACTERDETAIL} component={CharacterDetail} />
-      <Stack.Screen name={FILTERCHARACTERS} component={FilterCharacters} />
+      <Stack.Screen
+        options={{
+          backgroundColor: Colors.TOMATO,
+        }}
+        name={FILTERCHARACTERS}
+        component={FilterCharacters}
+      />
       <Stack.Screen name={SEARCHCHARACTERS} component={SearchCharacters} />
     </Stack.Navigator>
   );
