@@ -13,6 +13,7 @@ const Colors = {
   GRAY: 'gray',
   BLUE: '#4677c7',
   PINK: '#dd50dd',
+  DETAILTEXT: '#e5ded1',
 };
 
 export default Colors;

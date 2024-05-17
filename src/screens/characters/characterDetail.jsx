@@ -2,7 +2,10 @@ import React, {useEffect} from 'react';
 import {View, Text, ScrollView, Image} from 'react-native';
 import {screenStyles} from '../../styles/screenStyles';
 import {useDispatch, useSelector} from 'react-redux';
-import {getSingleCharacter} from '../../store/actions/charactersActions';
+import {
+  getSingleCharacter,
+  resetData,
+} from '../../store/actions/charactersActions';
 import Spinner from '../../components/ui/spinner';
 import {characterDetailStyle} from '../../styles/characterDetailsStyles';
 import {StatusTypes} from '../../utils/constants';
@@ -18,7 +21,7 @@ const CharacterDetail = ({route}) => {
     dispatch(getSingleCharacter(characterID));
 
     return () => {
-      console.log(characterID);
+      dispatch(resetData());
     };
   }, []);
 
@@ -51,23 +54,89 @@ const CharacterDetail = ({route}) => {
                   : null,
               ]}>
               <Text style={characterDetailStyle.status}>
-                {singleCharacter.status}
+                {singleCharacter?.status}
               </Text>
             </View>
           </View>
           <View style={characterDetailStyle.nameContainer}>
             <Text style={characterDetailStyle.name}>
-              {singleCharacter.name}
+              {singleCharacter?.name}
             </Text>
           </View>
-          <View>
-            <Text>PROPERTIES</Text>
+          <View style={characterDetailStyle.sectionContainer}>
+            <Text style={characterDetailStyle.sectionTitle}>PROPERTIES</Text>
+            <View style={characterDetailStyle.rowContainer}>
+              <View style={characterDetailStyle.firstField}>
+                <Text>Gender :</Text>
+              </View>
+              <View style={characterDetailStyle.secondField}>
+                <Text>{singleCharacter?.gender}</Text>
+              </View>
+            </View>
+            <View style={characterDetailStyle.rowContainer}>
+              <View style={characterDetailStyle.firstField}>
+                <Text>Species :</Text>
+              </View>
+              <View style={characterDetailStyle.secondField}>
+                <Text>{singleCharacter?.species}</Text>
+              </View>
+            </View>
+            <View style={characterDetailStyle.rowContainer}>
+              <View style={characterDetailStyle.firstField}>
+                <Text>Status :</Text>
+              </View>
+              <View style={characterDetailStyle.secondField}>
+                <Text>{singleCharacter?.status}</Text>
+              </View>
+            </View>
           </View>
-          <View>
-            <Text>WHEREABOUTS</Text>
+          <View style={characterDetailStyle.sectionContainer}>
+            <Text style={characterDetailStyle.sectionTitle}>WHEREABOUTS</Text>
+            <View style={characterDetailStyle.rowContainer}>
+              <View style={characterDetailStyle.firstField}>
+                <Text>Origin :</Text>
+              </View>
+              <View style={characterDetailStyle.secondField}>
+                <Text>{singleCharacter.origin?.name}</Text>
+              </View>
+            </View>
+            <View style={characterDetailStyle.rowContainer}>
+              <View style={characterDetailStyle.firstField}>
+                <Text>Location :</Text>
+              </View>
+              <View style={characterDetailStyle.secondField}>
+                <Text>{singleCharacter?.location?.name}</Text>
+              </View>
+            </View>
+            <View style={characterDetailStyle.rowContainer}>
+              <View style={characterDetailStyle.firstField}>
+                <Text>Url :</Text>
+              </View>
+              <View style={characterDetailStyle.secondField}>
+                <Text>{singleCharacter?.url}</Text>
+              </View>
+            </View>
           </View>
-          <View>
-            <Text>FEATURED CHAPTERS</Text>
+          <View style={characterDetailStyle.sectionContainer}>
+            <Text style={characterDetailStyle.sectionTitle}>
+              FEATURED CHAPTERS
+            </Text>
+            <View style={characterDetailStyle.rowContainer}>
+              <View style={characterDetailStyle.firstField}>
+                <Text>Created :</Text>
+              </View>
+              <View style={characterDetailStyle.secondField}>
+                <Text>{singleCharacter?.created}</Text>
+              </View>
+            </View>
+            {/* <View style={characterDetailStyle.rowContainer}>
+              <View style={characterDetailStyle.firstField}>
+                <Text>Episodes:</Text>
+              </View>
+              <View style={characterDetailStyle.secondField}>
+                <Text>{singleCharacter?.episode[1]}</Text>
+              </View>
+            </View> */}
           </View>
         </ScrollView>
       )}

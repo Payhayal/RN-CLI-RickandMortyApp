@@ -5,6 +5,9 @@ import {
   FETCH_SINGLECHARACTER,
   PENDING_SINGLECHARACTER,
   REJECT_SINGLECHARACTER,
+  RESET_DATA,
+  CHANGE_PAGE_PARAMS,
+  LOAD_MORE_DATA,
 } from '../types/characterTypes';
 
 const initialState = {
@@ -14,6 +17,9 @@ const initialState = {
   pendingSingleCharacter: false,
   error: null,
   errorSingleCharacter: null,
+  params: {
+    page: 1,
+  },
 };
 
 const characterReducer = (state = initialState, action) => {
@@ -23,6 +29,11 @@ const characterReducer = (state = initialState, action) => {
         ...state,
         characterList: action.payload,
         pending: false,
+      };
+    case LOAD_MORE_DATA:
+      return {
+        ...state,
+        characterList: [...state.characterList, ...action.payload],
       };
     case PENDING_CHARACTERS:
       return {
@@ -48,10 +59,17 @@ const characterReducer = (state = initialState, action) => {
         errorSingleCharacter: action.error,
       };
 
+    case RESET_DATA:
       return {
         ...state,
-        pending: false,
-        error: action.error,
+        pendingSingleCharacter: false,
+        errorSingleCharacter: null,
+        singleCharacter: {},
+      };
+    case CHANGE_PAGE_PARAMS:
+      return {
+        ...state,
+        params: action.params,
       };
 
     default:

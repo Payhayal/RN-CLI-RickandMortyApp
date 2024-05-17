@@ -5,7 +5,7 @@ const characterDetailStyle = StyleSheet.create({
   imageContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginVertical: 10,
+    marginVertical: 5,
   },
   image: {
     width: 150,
@@ -65,10 +65,33 @@ const characterDetailStyle = StyleSheet.create({
   sectionTitle: {
     color: Colors.BACKGROUNDCOLOR,
     textAlign: 'center',
-    marginVertical: 10,
+    marginVertical: 5,
+    fontWeight: '700',
+    fontSize: 18,
+    fontStyle: 'italic',
   },
   sectionContainer: {
     margin: 5,
+  },
+  rowContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginVertical: 5,
+  },
+  firstField: {
+    backgroundColor: Colors.DETAILTEXT,
+    padding: 10,
+    flex: 1,
+    borderRadius: 10,
+  },
+  secondField: {
+    backgroundColor: Colors.DETAILTEXT,
+    padding: 10,
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 5,
+    borderRadius: 10,
   },
 });
 export {characterDetailStyle};
