@@ -8,6 +8,7 @@ import {tabBarStyle} from '../styles/tabBarStyle';
 import {CHARACTERS, EPISODES, LOCATIONS, SETTINGS} from '../utils/routes';
 import Colors from '../themes/colors';
 import TabIcon from './tabIcon';
+import HeaderRight from './headerRight';
 
 const Tab = createBottomTabNavigator();
 
@@ -26,6 +27,7 @@ export default function TabNavigator() {
         headerStyle: tabBarStyle.headerStyle,
         tabBarStyle: tabBarStyle.tabBarStyle,
         tabBarActiveTintColor: Colors.TOMATO,
+        headerRight: props => <HeaderRight />,
       })}>
       <Tab.Screen name={CHARACTERS} component={Characters} />
       <Tab.Screen name={EPISODES} component={Episodes} />
