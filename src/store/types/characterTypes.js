@@ -14,3 +14,6 @@ export const RESET_DATA = 'RESET_DATA';
 // Change Page Parameter
 export const CHANGE_PAGE_PARAMS = 'CHANGE_PAGE_PARAMS';
 export const LOAD_MORE_DATA = 'LOAD_MORE_DATA';
+
+// Search Page
+export const SEARCH_CHARACTERS = 'SEARCH_CHARACTERS';
