@@ -10,6 +10,7 @@ import {
   RESET_DATA,
   CHANGE_PAGE_PARAMS,
   LOAD_MORE_DATA,
+  SEARCH_CHARACTERS,
 } from '../types/characterTypes';
 
 export const getCharacterList = params => {
@@ -70,6 +71,24 @@ export const loadMoreData = params => {
 
       dispatch({
         type: LOAD_MORE_DATA,
+        payload: res.data.results,
+      });
+    } catch (error) {
+      dispatch({
+        type: REJECT_CHARACTERS,
+        error: error,
+      });
+    }
+  };
+};
+
+export const searchCharacterList = params => {
+  return async dispatch => {
+    dispatch({type: PENDING_CHARACTERS});
+    try {
+      const res = await getRequest(CHARACTERS_URL, params);
+      dispatch({
+        type: SEARCH_CHARACTERS,
         payload: res.data.results,
       });
     } catch (error) {
