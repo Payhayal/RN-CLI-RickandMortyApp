@@ -8,10 +8,12 @@ import {
   RESET_DATA,
   CHANGE_PAGE_PARAMS,
   LOAD_MORE_DATA,
+  SEARCH_CHARACTERS,
 } from '../types/characterTypes';
 
 const initialState = {
   characterList: [],
+  searchCharacters: [],
   singleCharacter: {},
   pending: false,
   pendingSingleCharacter: false,
@@ -22,6 +24,7 @@ const initialState = {
     status: null,
     gender: null,
     species: null,
+    name: null,
   },
 };
 
@@ -74,6 +77,12 @@ const characterReducer = (state = initialState, action) => {
       return {
         ...state,
         params: {...state.params, ...action.params},
+      };
+    case SEARCH_CHARACTERS:
+      return {
+        ...state,
+        searchCharacters: action.payload,
+        pending: false,
       };
 
     default:

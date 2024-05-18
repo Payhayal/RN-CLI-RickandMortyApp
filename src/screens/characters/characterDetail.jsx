@@ -35,23 +35,23 @@ const CharacterDetail = ({route}) => {
             <Image
               style={[
                 characterDetailStyle.image,
-                singleCharacter.status === StatusTypes.ALIVE
+                singleCharacter?.status === StatusTypes.ALIVE
                   ? characterDetailStyle.statusAliveContainer
                   : characterDetailStyle.statusDeadContainer,
-                singleCharacter.status === StatusTypes.UNKNOWN
+                singleCharacter?.status === StatusTypes.UNKNOWN
                   ? characterDetailStyle.statusUnknownContainer
-                  : null,
+                  : characterDetailStyle.statusUnknownContainer,
               ]}
               source={{uri: singleCharacter.image}}
             />
             <View
               style={[
-                singleCharacter.status === StatusTypes.ALIVE
+                singleCharacter?.status === StatusTypes.ALIVE
                   ? characterDetailStyle.aliveStatusContainer
                   : characterDetailStyle.deadStatusContainer,
-                singleCharacter.status === StatusTypes.UNKNOWN
+                singleCharacter?.status === StatusTypes.UNKNOWN
                   ? characterDetailStyle.unknownStatusContainer
-                  : null,
+                  : characterDetailStyle.unknownStatusContainer,
               ]}>
               <Text style={characterDetailStyle.status}>
                 {singleCharacter?.status}
