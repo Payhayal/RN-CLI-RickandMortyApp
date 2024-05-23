@@ -27,9 +27,12 @@ export default function TabNavigator() {
         headerStyle: tabBarStyle.headerStyle,
         tabBarStyle: tabBarStyle.tabBarStyle,
         tabBarActiveTintColor: Colors.TOMATO,
-        headerRight: props => <HeaderRight />,
       })}>
-      <Tab.Screen name={CHARACTERS} component={Characters} />
+      <Tab.Screen
+        options={() => ({headerRight: props => <HeaderRight />})}
+        name={CHARACTERS}
+        component={Characters}
+      />
       <Tab.Screen name={EPISODES} component={Episodes} />
       <Tab.Screen name={LOCATIONS} component={Locations} />
       <Tab.Screen name={SETTINGS} component={Settings} />
