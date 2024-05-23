@@ -40,9 +40,9 @@ const CharacterDetail = ({route}) => {
                   : characterDetailStyle.statusDeadContainer,
                 singleCharacter?.status === StatusTypes.UNKNOWN
                   ? characterDetailStyle.statusUnknownContainer
-                  : characterDetailStyle.statusUnknownContainer,
+                  : null,
               ]}
-              source={{uri: singleCharacter.image}}
+              source={{uri: singleCharacter?.image}}
             />
             <View
               style={[
@@ -51,7 +51,7 @@ const CharacterDetail = ({route}) => {
                   : characterDetailStyle.deadStatusContainer,
                 singleCharacter?.status === StatusTypes.UNKNOWN
                   ? characterDetailStyle.unknownStatusContainer
-                  : characterDetailStyle.unknownStatusContainer,
+                  : null,
               ]}>
               <Text style={characterDetailStyle.status}>
                 {singleCharacter?.status}
@@ -97,7 +97,7 @@ const CharacterDetail = ({route}) => {
                 <Text>Origin :</Text>
               </View>
               <View style={characterDetailStyle.secondField}>
-                <Text>{singleCharacter.origin?.name}</Text>
+                <Text>{singleCharacter?.origin?.name}</Text>
               </View>
             </View>
             <View style={characterDetailStyle.rowContainer}>
@@ -129,14 +129,19 @@ const CharacterDetail = ({route}) => {
                 <Text>{singleCharacter?.created}</Text>
               </View>
             </View>
-            {/* <View style={characterDetailStyle.rowContainer}>
+            <View style={characterDetailStyle.rowContainer}>
               <View style={characterDetailStyle.firstField}>
                 <Text>Episodes:</Text>
               </View>
               <View style={characterDetailStyle.secondField}>
-                <Text>{singleCharacter?.episode[1]}</Text>
+                <Text>
+                  {singleCharacter?.episode &&
+                  singleCharacter.episode.length > 0
+                    ? singleCharacter.episode[0]
+                    : null}
+                </Text>
               </View>
-            </View> */}
+            </View>
           </View>
         </ScrollView>
       )}

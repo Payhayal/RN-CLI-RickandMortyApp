@@ -12,6 +12,7 @@ import {genders, species, status} from '../../utils/constants';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {changePageParams} from '../../store/actions/charactersActions';
+import {CHARACTERS} from '../../utils/routes';
 
 const FilterCharacters = () => {
   const {params} = useSelector(state => state.characters);
@@ -26,9 +27,8 @@ const FilterCharacters = () => {
     dispatch(
       changePageParams({gender: null, status: null, species: null, page: 1}),
     );
-    navigation.goBack();
+    navigation.navigate(CHARACTERS, {type: 'filter'});
   };
-  //   console.log(params);
 
   return (
     <View style={styles.container}>

@@ -16,19 +16,19 @@ const CharacterCard = ({item}) => {
       }
       style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image style={styles.image} source={{uri: item.image}} />
+        <Image style={styles.image} source={{uri: item?.image}} />
       </View>
       <View style={styles.infoContainer}>
-        <Text style={styles.name}>{item.name}</Text>
-        <Text style={styles.species}>{item.species}</Text>
+        <Text style={styles.name}>{item?.name}</Text>
+        <Text style={styles.species}>{item?.species}</Text>
         <View style={styles.midContainer}>
           <View style={styles.statusContainer}>
-            <StatusIcon size={15} status={item.status} />
-            <Text style={styles.status}>{item.status}</Text>
+            <StatusIcon size={15} status={item?.status} />
+            <Text style={styles.status}>{item?.status}</Text>
           </View>
           <View style={styles.genderContainer}>
-            <GenderIcon size={15} gender={item.gender} />
-            <Text style={styles.gender}>{item.gender}</Text>
+            <GenderIcon size={15} gender={item?.gender} />
+            <Text style={styles.gender}>{item?.gender}</Text>
           </View>
         </View>
       </View>
