@@ -12,6 +12,7 @@ import {
 } from '../types/characterTypes';
 
 const initialState = {
+  type: null,
   characterList: [],
   searchCharacters: [],
   singleCharacter: {},

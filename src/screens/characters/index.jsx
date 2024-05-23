@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, FlatList} from 'react-native';
 import {screenStyles} from '../../styles/screenStyles';
 import {useDispatch, useSelector} from 'react-redux';
@@ -6,12 +6,15 @@ import {
   changePageParams,
   getCharacterList,
   loadMoreData,
+  searchCharacterList,
 } from '../../store/actions/charactersActions';
 import Spinner from '../../components/ui/spinner';
 import CharacterCard from '../../components/characters/characterCard';
 
-const Characters = () => {
-  const {characterList, pending, params} = useSelector(
+const Characters = ({route}) => {
+  const [page, setPage] = useState(1);
+  const {type} = route;
+  const {characterList, pending, params, searchCharacters} = useSelector(
     state => state.characters,
   );
 
@@ -22,9 +25,12 @@ const Characters = () => {
   }, [params]);
 
   const handleLoadMore = () => {
-    let page = params.page + 1;
-    dispatch(changePageParams({page}));
-    dispatch(loadMoreData({params}));
+    setPage(page + 1);
+    const parameters = {
+      ...params,
+      page: page,
+    };
+    dispatch(loadMoreData(parameters));
   };
 
   return (
@@ -33,9 +39,11 @@ const Characters = () => {
         <Spinner />
       ) : (
         <FlatList
-          data={characterList}
+          keyExtractor={item => item?.id}
+          initialNumToRender={5}
+          data={type === 'filter' ? characterList : searchCharacters}
           renderItem={({item}) => <CharacterCard item={item} />}
-          onEndReachedThreshold={0.1}
+          onEndReachedThreshold={0.5}
           onEndReached={handleLoadMore}
           ListFooterComponent={<Spinner />}
         />
