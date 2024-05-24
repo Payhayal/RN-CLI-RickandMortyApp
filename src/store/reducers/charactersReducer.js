@@ -37,6 +37,12 @@ const characterReducer = (state = initialState, action) => {
         characterList: action.payload,
         pending: false,
       };
+    case SEARCH_CHARACTERS:
+      return {
+        ...state,
+        searchCharacters: action.payload,
+        pending: false,
+      };
     case LOAD_MORE_DATA:
       return {
         ...state,
@@ -78,12 +84,6 @@ const characterReducer = (state = initialState, action) => {
       return {
         ...state,
         params: {...state.params, ...action.params},
-      };
-    case SEARCH_CHARACTERS:
-      return {
-        ...state,
-        searchCharacters: action.payload,
-        pending: false,
       };
 
     default:
