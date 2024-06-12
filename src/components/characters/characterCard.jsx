@@ -19,7 +19,10 @@ const CharacterCard = ({item}) => {
         <Image style={styles.image} source={{uri: item?.image}} />
       </View>
       <View style={styles.infoContainer}>
-        <Text style={styles.name}>{item?.name}</Text>
+        <Text style={styles.name}>
+          {item?.id}
+          {item?.name}
+        </Text>
         <Text style={styles.species}>{item?.species}</Text>
         <View style={styles.midContainer}>
           <View style={styles.statusContainer}>

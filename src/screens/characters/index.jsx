@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {View, FlatList, SectionList} from 'react-native';
+import {View, FlatList} from 'react-native';
 import {screenStyles} from '../../styles/screenStyles';
 import {useDispatch, useSelector} from 'react-redux';
 import {
-  changePageParams,
   getCharacterList,
   loadMoreData,
-  searchCharacterList,
 } from '../../store/actions/charactersActions';
 import Spinner from '../../components/ui/spinner';
 import CharacterCard from '../../components/characters/characterCard';
@@ -31,6 +29,7 @@ const Characters = ({route}) => {
     };
     dispatch(loadMoreData(parameters));
   };
+  // console.log(page);
 
   return (
     <View style={screenStyles.container}>

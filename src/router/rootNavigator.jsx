@@ -3,6 +3,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TabNavigator from './tabNavigator';
 import {
   CHARACTERDETAIL,
+  EPISODECARDDETAIL,
+  EPISODEDETAIL,
   FILTERCHARACTERS,
   SEARCHCHARACTERS,
   TABNAVIGATOR,
@@ -11,6 +13,8 @@ import CharacterDetail from '../screens/characters/characterDetail';
 import Colors from '../themes/colors';
 import FilterCharacters from '../screens/characters/filterCharacters';
 import SearchCharacters from '../screens/characters/searchCharacters';
+import EpisodeDetail from '../screens/episodes/episodeDetail';
+import EpisodeCardDetail from '../screens/episodes/episodeCardDetail';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +45,8 @@ function RootNavigator() {
         component={FilterCharacters}
       />
       <Stack.Screen name={SEARCHCHARACTERS} component={SearchCharacters} />
+      <Stack.Screen name={EPISODEDETAIL} component={EpisodeDetail} />
+      <Stack.Screen name={EPISODECARDDETAIL} component={EpisodeCardDetail} />
     </Stack.Navigator>
   );
 }

@@ -3,32 +3,34 @@ import {View, FlatList, StyleSheet, TextInput} from 'react-native';
 import {screenStyles} from '../../styles/screenStyles';
 import {useDispatch, useSelector} from 'react-redux';
 import {
-  changePageParams,
+  changeParams,
   searchCharacterList,
 } from '../../store/actions/charactersActions';
 import SearchItem from './searchItem';
 import Colors from '../../themes/colors';
-import {SearchNormal} from 'iconsax-react-native';
 import CustomButton from '../../components/ui/customButton';
 
 const ListHeaderComponent = () => {
-  const {characterList, pending, params, searchCharacters} = useSelector(
-    state => state.characters,
-  );
+  const {params, searchCharacters} = useSelector(state => state.characters);
   const [searchText, setSearchText] = useState(null);
+
   const dispatch = useDispatch();
 
   const handleSubmit = () => {
-    dispatch(changePageParams({name: searchText}));
+    dispatch(changeParams({name: searchText}));
   };
 
   const clearCharacters = () => {
     setSearchText(null);
     dispatch(searchCharacterList());
-    dispatch(changePageParams({name: null}));
-
     dispatch(
-      changePageParams({gender: null, status: null, species: null, page: 1}),
+      changeParams({
+        gender: null,
+        status: null,
+        species: null,
+        page: 1,
+        name: null,
+      }),
     );
   };
   return (
@@ -44,9 +46,6 @@ const ListHeaderComponent = () => {
           setSearchText(text);
         }}
       />
-      {/* <TouchableOpacity onPress={() => handleSubmit()} style={styles.searchBtn}>
-        <SearchNormal variant="Bulk" color={Colors.TOMATO} />
-      </TouchableOpacity> */}
 
       <View style={styles.bottomContainer}>
         <CustomButton
@@ -66,9 +65,9 @@ const ListHeaderComponent = () => {
 const SearchCharacters = () => {
   const {params, searchCharacters} = useSelector(state => state.characters);
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(searchCharacterList(params));
-    console.log('params', params);
+    dispatch(searchCharacterList());
   }, [params]);
 
   return (
