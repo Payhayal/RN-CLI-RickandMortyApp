@@ -8,9 +8,10 @@ import {
   PENDING_SINGLECHARACTER,
   REJECT_SINGLECHARACTER,
   RESET_DATA,
-  CHANGE_PAGE_PARAMS,
+  CHANGE_PARAMS,
   LOAD_MORE_DATA,
   SEARCH_CHARACTERS,
+  CHANGE_PAGE_SEARCHPARAMS,
 } from '../types/characterTypes';
 
 export const getCharacterList = params => {
@@ -58,9 +59,9 @@ export const resetData = () => {
   };
 };
 
-export const changePageParams = params => {
+export const changeParams = params => {
   return async dispatch => {
-    dispatch({type: CHANGE_PAGE_PARAMS, params});
+    dispatch({type: CHANGE_PARAMS, params});
   };
 };
 
@@ -99,3 +100,8 @@ export const searchCharacterList = params => {
     }
   };
 };
+// export const changePageSearchParams = searchparams => {
+//   return async dispatch => {
+//     dispatch({type: CHANGE_PAGE_SEARCHPARAMS, searchparams});
+//   };
+// };

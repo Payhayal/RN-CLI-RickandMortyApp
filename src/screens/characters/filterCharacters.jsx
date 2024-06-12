@@ -11,7 +11,7 @@ import Colors from '../../themes/colors';
 import {genders, species, status} from '../../utils/constants';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
-import {changePageParams} from '../../store/actions/charactersActions';
+import {changeParams} from '../../store/actions/charactersActions';
 import {CHARACTERS} from '../../utils/routes';
 
 const FilterCharacters = () => {
@@ -25,9 +25,9 @@ const FilterCharacters = () => {
   };
   const clearCharacters = () => {
     dispatch(
-      changePageParams({gender: null, status: null, species: null, page: 1}),
+      changeParams({gender: null, status: null, species: null, page: 1}),
     );
-    navigation.navigate(CHARACTERS, {type: 'filter'});
+    navigation.navigate(CHARACTERS);
   };
 
   return (
@@ -38,8 +38,8 @@ const FilterCharacters = () => {
           <View style={styles.genderContainer}>
             {genders.map(item => (
               <TouchableOpacity
-                onPress={() => dispatch(changePageParams({gender: item.value}))}
-                key={item.id}
+                onPress={() => dispatch(changeParams({gender: item?.value}))}
+                key={item?.id}
                 style={[
                   styles.genders,
                   {
@@ -57,7 +57,7 @@ const FilterCharacters = () => {
           <View style={styles.genderContainer}>
             {status.map(item => (
               <TouchableOpacity
-                onPress={() => dispatch(changePageParams({status: item.value}))}
+                onPress={() => dispatch(changeParams({status: item.value}))}
                 key={item.id}
                 style={[
                   styles.genders,
@@ -76,9 +76,7 @@ const FilterCharacters = () => {
           <View style={styles.speciesContainer}>
             {species.map(item => (
               <TouchableOpacity
-                onPress={() =>
-                  dispatch(changePageParams({species: item.value}))
-                }
+                onPress={() => dispatch(changeParams({species: item.value}))}
                 key={item.id}
                 style={[
                   styles.species,

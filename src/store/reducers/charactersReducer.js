@@ -6,7 +6,7 @@ import {
   PENDING_SINGLECHARACTER,
   REJECT_SINGLECHARACTER,
   RESET_DATA,
-  CHANGE_PAGE_PARAMS,
+  CHANGE_PARAMS,
   LOAD_MORE_DATA,
   SEARCH_CHARACTERS,
 } from '../types/characterTypes';
@@ -15,10 +15,10 @@ const initialState = {
   type: null,
   characterList: [],
   searchCharacters: [],
-  singleCharacter: {},
   pending: false,
-  pendingSingleCharacter: false,
   error: null,
+  singleCharacter: {},
+  pendingSingleCharacter: false,
   errorSingleCharacter: null,
   params: {
     page: 1,
@@ -27,6 +27,13 @@ const initialState = {
     species: null,
     name: null,
   },
+  // searchparams: {
+  //   page: 1,
+  //   status: null,
+  //   gender: null,
+  //   species: null,
+  //   name: null,
+  // },
 };
 
 const characterReducer = (state = initialState, action) => {
@@ -35,6 +42,12 @@ const characterReducer = (state = initialState, action) => {
       return {
         ...state,
         characterList: action.payload,
+        pending: false,
+      };
+    case SEARCH_CHARACTERS:
+      return {
+        ...state,
+        searchCharacters: action.payload,
         pending: false,
       };
     case LOAD_MORE_DATA:
@@ -49,6 +62,11 @@ const characterReducer = (state = initialState, action) => {
         pending: true,
       };
     case REJECT_CHARACTERS:
+      return {
+        ...state,
+        pending: false,
+        error: action.error,
+      };
     case FETCH_SINGLECHARACTER:
       return {
         ...state,
@@ -74,17 +92,16 @@ const characterReducer = (state = initialState, action) => {
         errorSingleCharacter: null,
         singleCharacter: {},
       };
-    case CHANGE_PAGE_PARAMS:
+    case CHANGE_PARAMS:
       return {
         ...state,
         params: {...state.params, ...action.params},
       };
-    case SEARCH_CHARACTERS:
-      return {
-        ...state,
-        searchCharacters: action.payload,
-        pending: false,
-      };
+    // case CHANGE_PAGE_SEARCHPARAMS:
+    //   return {
+    //     ...state,
+    //     searchparams: {...state.searchparams, ...action.searchparams},
+    //   };
 
     default:
       return state;

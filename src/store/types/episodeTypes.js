@@ -1,0 +1,15 @@
+// Episode page
+export const FETCH_EPISODE = 'FETCH_EPISODE';
+export const PENDING_EPISODE = 'PENDING_EPISODE';
+export const REJECT_EPISODE = 'REJECT_EPISODE';
+
+// EPISODE Details page
+export const FETCH_SINGLE_EPISODE = 'FETCH_SINGLE_EPISODE';
+export const PENDING_SINGLE_EPISODE = 'PENDING_SINGLE_EPISODE';
+export const REJECT_SINGLE_EPISODE = 'REJECT_SINGLE_EPISODE';
+
+// reset episode
+export const RESET_EPISODE = 'RESET_EPISODE';
+
+export const CHANGE_PARAMS = 'CHANGE_PARAMS';
+export const LOAD_MORE_EPISODE = 'LOAD_MORE_EPISODE';
