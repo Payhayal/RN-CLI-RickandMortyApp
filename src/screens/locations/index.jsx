@@ -1,26 +1,53 @@
-//import liraries
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, FlatList} from 'react-native';
 import {screenStyles} from '../../styles/screenStyles';
+import {useDispatch, useSelector} from 'react-redux';
+import Spinner from '../../components/ui/spinner';
+import {
+  getLocationList,
+  loadLocation,
+} from '../../store/actions/locationActions';
+import LocationCard from '../../components/location/locationCard';
 
-// create a component
-const Locations = () => {
+const Locations = ({route}) => {
+  const [page, setPage] = useState(1);
+  const {locationList, pending, params} = useSelector(state => state.locations);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getLocationList(params));
+  }, [params]);
+
+  // console.log('index', JSON.stringify(locationList, 4, 2));
+
+  const handleLoadMore = () => {
+    setPage(page + 1);
+    const parameters = {
+      ...params,
+      page: page,
+    };
+    dispatch(loadLocation(parameters));
+  };
+  // console.log(page);
+
   return (
     <View style={screenStyles.container}>
-      <Text>Locations</Text>
+      {pending ? (
+        <Spinner />
+      ) : (
+        <FlatList
+          keyExtractor={item => item?.id}
+          initialNumToRender={5}
+          data={locationList}
+          renderItem={({item}) => <LocationCard item={item} />}
+          onEndReachedThreshold={0.5}
+          onEndReached={handleLoadMore}
+          ListFooterComponent={<Spinner />}
+        />
+      )}
     </View>
   );
 };
 
-// define your styles
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-  },
-});
-
-//make this component available to the app
 export default Locations;
