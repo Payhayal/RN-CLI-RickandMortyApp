@@ -25,11 +25,10 @@ const Characters = ({route}) => {
     setPage(page + 1);
     const parameters = {
       ...params,
-      page: page,
+      page: page + 1,
     };
     dispatch(loadMoreData(parameters));
   };
-  // console.log(page);
 
   return (
     <View style={screenStyles.container}>
@@ -37,13 +36,13 @@ const Characters = ({route}) => {
         <Spinner />
       ) : (
         <FlatList
-          keyExtractor={item => item?.id}
+          keyExtractor={(item, index) => `${item?.id}-${index}`}
           initialNumToRender={5}
           data={characterList}
           renderItem={({item}) => <CharacterCard item={item} />}
           onEndReachedThreshold={0.5}
           onEndReached={handleLoadMore}
-          ListFooterComponent={<Spinner />}
+          // ListFooterComponent={<Spinner />}
         />
       )}
     </View>

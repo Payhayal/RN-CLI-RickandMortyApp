@@ -28,7 +28,7 @@ const Episodes = ({route}) => {
     setPage(page + 1);
     const parameters = {
       ...params,
-      page: page,
+      page: page + 1,
     };
     dispatch(loadEpisode(parameters));
   };
@@ -39,7 +39,7 @@ const Episodes = ({route}) => {
         <Spinner />
       ) : (
         <FlatList
-          keyExtractor={item => item?.id}
+          keyExtractor={(item, index) => `${item?.id}-${index}`}
           initialNumToRender={4}
           data={episodeList}
           renderItem={({item}) => <EpisodeCard item={item} />}

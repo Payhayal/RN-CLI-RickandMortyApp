@@ -3,6 +3,7 @@ import {View, FlatList, StyleSheet, TextInput} from 'react-native';
 import {screenStyles} from '../../styles/screenStyles';
 import {useDispatch, useSelector} from 'react-redux';
 import {
+  changePageSearchParams,
   changeParams,
   searchCharacterList,
 } from '../../store/actions/charactersActions';
@@ -11,20 +12,22 @@ import Colors from '../../themes/colors';
 import CustomButton from '../../components/ui/customButton';
 
 const ListHeaderComponent = () => {
-  const {params, searchCharacters} = useSelector(state => state.characters);
+  const {searchparams, searchCharacters} = useSelector(
+    state => state.characters,
+  );
   const [searchText, setSearchText] = useState(null);
 
   const dispatch = useDispatch();
 
   const handleSubmit = () => {
-    dispatch(changeParams({name: searchText}));
+    dispatch(changePageSearchParams({name: searchText, searchparams}));
   };
 
   const clearCharacters = () => {
     setSearchText(null);
     dispatch(searchCharacterList());
     dispatch(
-      changeParams({
+      changePageSearchParams({
         gender: null,
         status: null,
         species: null,
@@ -39,7 +42,7 @@ const ListHeaderComponent = () => {
         value={searchText}
         returnKeyType="search"
         clearButtonMode="while-editing"
-        onSubmitEditing={handleSubmit}
+        onSubmitEditing={() => handleSubmit()}
         placeholder="Search Characters"
         style={styles.input}
         onChangeText={text => {
@@ -54,7 +57,7 @@ const ListHeaderComponent = () => {
           backColor={Colors.RED}
         />
         <CustomButton
-          onPress={clearCharacters}
+          onPress={() => clearCharacters()}
           title="Clear"
           backColor={Colors.GRAY}
         />
@@ -63,17 +66,19 @@ const ListHeaderComponent = () => {
   );
 };
 const SearchCharacters = () => {
-  const {params, searchCharacters} = useSelector(state => state.characters);
+  const {searchparams, searchCharacters} = useSelector(
+    state => state.characters,
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(searchCharacterList());
-  }, [params]);
+    dispatch(searchCharacterList(searchparams));
+  }, [searchparams]);
 
   return (
     <View style={screenStyles.container}>
       <FlatList
-        keyExtractor={item => item?.id}
+        keyExtractor={(item, index) => item?.id}
         data={searchCharacters}
         renderItem={({item}) => <SearchItem item={item} />}
         ListHeaderComponent={ListHeaderComponent}
