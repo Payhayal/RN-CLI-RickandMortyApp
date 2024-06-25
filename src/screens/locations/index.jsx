@@ -25,7 +25,7 @@ const Locations = ({route}) => {
     setPage(page + 1);
     const parameters = {
       ...params,
-      page: page,
+      page: page + 1,
     };
     dispatch(loadLocation(parameters));
   };
@@ -37,7 +37,7 @@ const Locations = ({route}) => {
         <Spinner />
       ) : (
         <FlatList
-          keyExtractor={item => item?.id}
+          keyExtractor={(item, index) => `${item?.id}-${index}`}
           initialNumToRender={5}
           data={locationList}
           renderItem={({item}) => <LocationCard item={item} />}
