@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {View, FlatList} from 'react-native';
+import React, {useCallback, useEffect, useState} from 'react';
+import {View, FlatList, StyleSheet} from 'react-native';
 import {screenStyles} from '../../styles/screenStyles';
 import {useDispatch, useSelector} from 'react-redux';
 import Spinner from '../../components/ui/spinner';
@@ -8,8 +8,13 @@ import {
   loadLocation,
 } from '../../store/actions/locationActions';
 import LocationCard from '../../components/location/locationCard';
+import CustomButton from '../../components/ui/customButton';
+import Colors from '../../themes/colors';
+import {LOCATIONDETAIL} from '../../utils/routes';
+import {useNavigation} from '@react-navigation/native';
 
 const Locations = ({route}) => {
+  const navigation = useNavigation();
   const [page, setPage] = useState(1);
   const {locationList, pending, params} = useSelector(state => state.locations);
 
@@ -19,17 +24,15 @@ const Locations = ({route}) => {
     dispatch(getLocationList(params));
   }, [params]);
 
-  // console.log('index', JSON.stringify(locationList, 4, 2));
-
-  const handleLoadMore = () => {
-    setPage(page + 1);
-    const parameters = {
+  const handleLoadMore = useCallback(() => {
+    const newPage = page + 1;
+    setPage(newPage);
+    const updatedParams = {
       ...params,
-      page: page + 1,
+      page: newPage,
     };
-    dispatch(loadLocation(parameters));
-  };
-  // console.log(page);
+    dispatch(loadLocation(updatedParams));
+  }, [page, params, dispatch]);
 
   return (
     <View style={screenStyles.container}>
@@ -46,8 +49,22 @@ const Locations = ({route}) => {
           ListFooterComponent={<Spinner />}
         />
       )}
+      <View style={styles.bottomContainer}>
+        <CustomButton
+          onPress={() => navigation.navigate(LOCATIONDETAIL)}
+          title="See All Residents in Locations "
+          backColor={Colors.GREEN}
+        />
+      </View>
     </View>
   );
 };
+const styles = StyleSheet.create({
+  bottomContainer: {
+    flexDirection: 'row',
+    paddingBottom: 15,
+    marginTop: 20,
+  },
+});
 
 export default Locations;

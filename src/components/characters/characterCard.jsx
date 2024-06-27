@@ -20,8 +20,7 @@ const CharacterCard = ({item}) => {
       </View>
       <View style={styles.infoContainer}>
         <Text style={styles.name}>
-          {item?.id}
-          {item?.name}
+          {item?.id}-{item?.name}
         </Text>
         <Text style={styles.species}>{item?.species}</Text>
         <View style={styles.midContainer}>

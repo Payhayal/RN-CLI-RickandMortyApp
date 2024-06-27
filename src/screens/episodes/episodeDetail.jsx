@@ -16,7 +16,6 @@ const EpisodeDetail = () => {
   const [selectedEpisode, setSelectedEpisode] = useState(null);
   const [characters, setCharacters] = useState([]);
 
-  // Tüm bölümleri çekmek
   useEffect(() => {
     const fetchEpisodes = async () => {
       try {
@@ -32,7 +31,6 @@ const EpisodeDetail = () => {
     fetchEpisodes();
   }, []);
 
-  // Seçilen bölümün karakterlerini çekmek
   useEffect(() => {
     const fetchCharacters = async () => {
       if (!selectedEpisode) {

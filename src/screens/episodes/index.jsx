@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {View, StyleSheet, FlatList} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {EPISODEDETAIL} from '../../utils/routes';
@@ -22,16 +22,15 @@ const Episodes = ({route}) => {
     dispatch(getEpisodeList(params));
   }, [params]);
 
-  // console.log('index', JSON.stringify(episodeList, 4, 2));
-
-  const handleLoadMore = () => {
-    setPage(page + 1);
-    const parameters = {
+  const handleLoadMore = useCallback(() => {
+    const newPage = page + 1;
+    setPage(newPage);
+    const updatedParams = {
       ...params,
-      page: page + 1,
+      page: newPage,
     };
-    dispatch(loadEpisode(parameters));
-  };
+    dispatch(loadEpisode(updatedParams));
+  }, [page, params, dispatch]);
 
   return (
     <View style={screenStyles.container}>
@@ -51,7 +50,7 @@ const Episodes = ({route}) => {
       <View style={styles.bottomContainer}>
         <CustomButton
           onPress={() => navigation.navigate(EPISODEDETAIL)}
-          title="See Which Characters Play in Episodes"
+          title="See All Characters in Episodes"
           backColor={Colors.GREEN}
         />
       </View>
