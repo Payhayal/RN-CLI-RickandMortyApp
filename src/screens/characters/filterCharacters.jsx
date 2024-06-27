@@ -20,7 +20,6 @@ const FilterCharacters = () => {
   const navigation = useNavigation();
 
   const filterCharacters = () => {
-    // dispatch(getCharacterList(params));
     navigation.goBack();
   };
   const clearCharacters = () => {

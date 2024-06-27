@@ -10,19 +10,21 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import Colors from '../../themes/colors';
+import Spinner from '../../components/ui/spinner';
 
-const EpisodeDetail = () => {
+const LocationDetail = () => {
   const [episodes, setEpisodes] = useState([]);
   const [selectedEpisode, setSelectedEpisode] = useState(null);
   const [characters, setCharacters] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchEpisodes = async () => {
       try {
         const response = await axios.get(
-          'https://rickandmortyapi.com/api/episode',
+          'https://rickandmortyapi.com/api/location',
         );
-        setEpisodes(response.data.results);
+        setEpisodes(response?.data?.results);
       } catch (error) {
         console.error(error);
       }
@@ -33,19 +35,20 @@ const EpisodeDetail = () => {
 
   useEffect(() => {
     const fetchCharacters = async () => {
-      if (!selectedEpisode) {
-        return;
-      }
+      if (!selectedEpisode) return;
 
+      setLoading(true);
       try {
-        const characterPromises = selectedEpisode.characters.map(url =>
+        const characterPromises = selectedEpisode?.residents?.map(url =>
           axios.get(url),
         );
         const characterResponses = await Promise.all(characterPromises);
-        const characters = characterResponses.map(response => response.data);
+        const characters = characterResponses?.map(response => response.data);
         setCharacters(characters);
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -57,16 +60,23 @@ const EpisodeDetail = () => {
       {selectedEpisode ? (
         <View>
           <Text style={styles.header}>
-            Characters in {selectedEpisode?.name}
+            Residents in {selectedEpisode?.name}
           </Text>
-          <ScrollView>
-            {characters.map((character, index) => (
-              <View key={index} style={styles.characterContainer}>
-                <Image source={{uri: character?.image}} style={styles.image} />
-                <Text style={styles.name}>{character?.name}</Text>
-              </View>
-            ))}
-          </ScrollView>
+          {loading ? (
+            <Spinner />
+          ) : (
+            <ScrollView>
+              {characters?.map((character, index) => (
+                <View key={index} style={styles.characterContainer}>
+                  <Image
+                    source={{uri: character?.image}}
+                    style={styles.image}
+                  />
+                  <Text style={styles.name}>{character?.name}</Text>
+                </View>
+              ))}
+            </ScrollView>
+          )}
         </View>
       ) : (
         <FlatList
@@ -126,4 +136,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EpisodeDetail;
+export default LocationDetail;

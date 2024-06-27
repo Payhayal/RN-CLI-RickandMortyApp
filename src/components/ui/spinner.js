@@ -1,9 +1,7 @@
-//import liraries
 import React from 'react';
 import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
 import Colors from '../../themes/colors';
 
-// create a component
 const Spinner = () => {
   return (
     <View style={styles.container}>
@@ -13,7 +11,6 @@ const Spinner = () => {
   );
 };
 
-// define your styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -22,5 +19,4 @@ const styles = StyleSheet.create({
   },
 });
 
-//make this component available to the app
 export default Spinner;

@@ -14,6 +14,7 @@ const Colors = {
   BLUE: '#4677c7',
   PINK: '#dd50dd',
   DETAILTEXT: '#e5ded1',
+  LIGHTGRAY: '#B5C0D0',
 };
 
 export default Colors;

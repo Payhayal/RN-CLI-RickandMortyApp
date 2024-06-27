@@ -4,7 +4,6 @@ import {screenStyles} from '../../styles/screenStyles';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   changePageSearchParams,
-  changeParams,
   searchCharacterList,
 } from '../../store/actions/charactersActions';
 import SearchItem from './searchItem';
@@ -54,7 +53,7 @@ const ListHeaderComponent = () => {
         <CustomButton
           onPress={() => handleSubmit()}
           title="Search"
-          backColor={Colors.RED}
+          backColor={Colors.GREEN}
         />
         <CustomButton
           onPress={() => clearCharacters()}
@@ -108,7 +107,9 @@ const styles = StyleSheet.create({
   },
   bottomContainer: {
     flexDirection: 'row',
-    paddingBottom: 20,
+    padding: 10,
+    width: 350,
+    height: 70,
   },
 });
 
