@@ -2,7 +2,6 @@ import React from 'react';
 import {Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Colors from '../../themes/colors';
 
-// create a component
 const CustomButton = props => {
   const {backColor, title} = props;
   return (
@@ -30,5 +29,4 @@ const styles = StyleSheet.create({
   },
 });
 
-//make this component available to the app
 export default CustomButton;

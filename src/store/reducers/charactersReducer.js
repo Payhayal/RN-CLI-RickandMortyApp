@@ -9,6 +9,7 @@ import {
   CHANGE_PARAMS,
   LOAD_MORE_DATA,
   SEARCH_CHARACTERS,
+  CHANGE_PAGE_SEARCHPARAMS,
 } from '../types/characterTypes';
 
 const initialState = {
@@ -27,13 +28,13 @@ const initialState = {
     species: null,
     name: null,
   },
-  // searchparams: {
-  //   page: 1,
-  //   status: null,
-  //   gender: null,
-  //   species: null,
-  //   name: null,
-  // },
+  searchparams: {
+    page: 1,
+    status: null,
+    gender: null,
+    species: null,
+    name: null,
+  },
 };
 
 const characterReducer = (state = initialState, action) => {
@@ -97,11 +98,11 @@ const characterReducer = (state = initialState, action) => {
         ...state,
         params: {...state.params, ...action.params},
       };
-    // case CHANGE_PAGE_SEARCHPARAMS:
-    //   return {
-    //     ...state,
-    //     searchparams: {...state.searchparams, ...action.searchparams},
-    //   };
+    case CHANGE_PAGE_SEARCHPARAMS:
+      return {
+        ...state,
+        searchparams: {...state.searchparams, ...action.searchparams},
+      };
 
     default:
       return state;

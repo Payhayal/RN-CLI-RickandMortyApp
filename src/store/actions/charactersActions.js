@@ -83,11 +83,11 @@ export const loadMoreData = params => {
   };
 };
 
-export const searchCharacterList = params => {
+export const searchCharacterList = searchparams => {
   return async dispatch => {
     dispatch({type: PENDING_CHARACTERS});
     try {
-      const res = await getRequest(CHARACTERS_URL, params);
+      const res = await getRequest(CHARACTERS_URL, searchparams);
       dispatch({
         type: SEARCH_CHARACTERS,
         payload: res.data.results,
@@ -100,8 +100,8 @@ export const searchCharacterList = params => {
     }
   };
 };
-// export const changePageSearchParams = searchparams => {
-//   return async dispatch => {
-//     dispatch({type: CHANGE_PAGE_SEARCHPARAMS, searchparams});
-//   };
-// };
+export const changePageSearchParams = searchparams => {
+  return async dispatch => {
+    dispatch({type: CHANGE_PAGE_SEARCHPARAMS, searchparams});
+  };
+};

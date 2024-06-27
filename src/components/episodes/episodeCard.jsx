@@ -23,11 +23,15 @@ const EpisodeCard = ({item}) => {
       style={styles.container}>
       <View style={styles.midContainer}>
         <View style={styles.viewContainer}>
+          <Text style={styles.name}>Episode: </Text>
+          <Text style={styles.name}>{item?.id}</Text>
+        </View>
+        <View style={styles.viewContainer}>
           <Text style={styles.name}>Name: </Text>
           <Text style={styles.name}>{item?.name}</Text>
         </View>
         <View style={styles.viewContainer}>
-          <Text style={styles.name}>Episode:</Text>
+          <Text style={styles.name}>Url:</Text>
           <Text style={styles.textItem}>{item?.url}</Text>
         </View>
         <View style={styles.viewContainer}>

@@ -6,6 +6,8 @@ import {
   EPISODECARDDETAIL,
   EPISODEDETAIL,
   FILTERCHARACTERS,
+  LOCATIONCARDDETAIL,
+  LOCATIONDETAIL,
   SEARCHCHARACTERS,
   TABNAVIGATOR,
 } from '../utils/routes';
@@ -15,6 +17,8 @@ import FilterCharacters from '../screens/characters/filterCharacters';
 import SearchCharacters from '../screens/characters/searchCharacters';
 import EpisodeDetail from '../screens/episodes/episodeDetail';
 import EpisodeCardDetail from '../screens/episodes/episodeCardDetail';
+import LocationCardDetail from '../screens/locations/locationCardDetail';
+import LocationDetail from '../screens/locations/locationDetail';
 
 const Stack = createNativeStackNavigator();
 
@@ -46,7 +50,9 @@ function RootNavigator() {
       />
       <Stack.Screen name={SEARCHCHARACTERS} component={SearchCharacters} />
       <Stack.Screen name={EPISODEDETAIL} component={EpisodeDetail} />
+      <Stack.Screen name={LOCATIONDETAIL} component={LocationDetail} />
       <Stack.Screen name={EPISODECARDDETAIL} component={EpisodeCardDetail} />
+      <Stack.Screen name={LOCATIONCARDDETAIL} component={LocationCardDetail} />
     </Stack.Navigator>
   );
 }

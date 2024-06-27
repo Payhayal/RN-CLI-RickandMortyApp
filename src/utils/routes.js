@@ -11,6 +11,8 @@ export const EPISODECARDDETAIL = 'All Details';
 
 // Locations
 export const LOCATIONS = 'Locations';
+export const LOCATIONDETAIL = 'Location Details';
+export const LOCATIONCARDDETAIL = 'Residents';
 
 // Settings
 export const SETTINGS = 'Settings';

@@ -1,9 +1,12 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, Pressable} from 'react-native';
 import Colors from '../../themes/colors';
-import {ArrowCircleRight} from 'iconsax-react-native';
+import CustomButton from '../ui/customButton';
+import {useNavigation} from '@react-navigation/native';
+import {LOCATIONCARDDETAIL} from '../../utils/routes';
 
 const LocationCard = ({item}) => {
+  const navigation = useNavigation();
   const formatDate = dateString => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
@@ -14,10 +17,10 @@ const LocationCard = ({item}) => {
   };
 
   return (
-    <TouchableOpacity style={styles.container}>
+    <Pressable style={styles.container}>
       <View style={styles.midContainer}>
         <View style={styles.viewContainer}>
-          <Text style={styles.name}>Number: </Text>
+          <Text style={styles.name}>Location : </Text>
           <Text style={styles.name}>{item?.id}</Text>
         </View>
         <View style={styles.viewContainer}>
@@ -40,22 +43,17 @@ const LocationCard = ({item}) => {
           <Text style={styles.name}>Created:</Text>
           <Text style={styles.textItem}>{formatDate(item?.created)}</Text>
         </View>
-        {/* <View style={styles.residentsContainer}>
-          <Text style={styles.name}>Residents: </Text>
-          <Text style={styles.residents}>{item?.residents}</Text> */}
-        {/* <View>
-            {item?.residents?.map(i => (
-              <View key={i?.id}>
-                <Text style={styles.residents}>{i}</Text>
-              </View>
-            ))}
-          </View> */}
-        {/* </View> */}
-        {/* <View style={styles.iconContainer}>
-          <ArrowCircleRight size={28} color={Colors.TOMATO} />
-        </View> */}
+        <View style={styles.bottomContainer}>
+          <CustomButton
+            onPress={() =>
+              navigation.navigate(LOCATIONCARDDETAIL, {item: item})
+            }
+            title="See Residents"
+            backColor={Colors.TOMATO}
+          />
+        </View>
       </View>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
@@ -73,9 +71,12 @@ const styles = StyleSheet.create({
     margin: 3,
     flexDirection: 'row',
   },
-  residentsContainer: {
-    margin: 3,
-    flexDirection: 'column',
+  bottomContainer: {
+    flexDirection: 'row',
+    paddingBottom: 10,
+    marginTop: 10,
+    width: 220,
+    marginHorizontal: 50,
   },
   name: {
     fontSize: 16,
@@ -93,9 +94,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-end',
     marginRight: 15,
-  },
-  residents: {
-    marginBottom: 5,
   },
 });
 

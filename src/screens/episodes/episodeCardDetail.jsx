@@ -35,19 +35,16 @@ const EpisodeCardDetail = ({route}) => {
         <Text style={styles.name}>Created: </Text>
         <Text style={styles.textItem}>{formatDate(item?.created)}</Text>
       </View>
-      {/* <View style={styles.chContainer}>
-        <Text style={styles.name}>Characters : </Text> */}
-      {/* <View style={styles.chContainer}>
-          <Text style={styles.textCharacters}>{item?.characters}</Text>
-        </View> */}
-      {/* <View>
-          {item?.characters?.map(i => (
-            <View key={i?.id}>
+      <View style={styles.chContainer}>
+        <Text style={styles.name}>Characters : </Text>
+        <View>
+          {item?.characters?.map((i, index) => (
+            <View key={`${i?.id}-${index}`}>
               <Text style={styles.textCharacters}>{i}</Text>
             </View>
           ))}
-        </View> */}
-      {/* </View> */}
+        </View>
+      </View>
     </ScrollView>
   );
 };
